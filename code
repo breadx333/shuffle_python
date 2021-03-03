@@ -1,0 +1,38 @@
+def shuffle_all(seq):
+    if not seq:
+        return [seq]
+    else:
+        res = []
+        for i in range(len(seq)):
+            rest = seq[:i] + seq[i+1:]
+            for x in shuffle_all(rest):
+                res.append(seq[i:i+1] + x)
+        return res
+
+def shuffle_yield(seq):
+    if not seq:
+        yield seq
+    else:
+        for i in range(len(seq)):
+            rest = seq[:i] + seq[i+1:]
+            for x in shuffle_yield(rest):
+                yield seq[i:i+1] + x
+
+while True:
+    massive = []
+
+    Adder = True
+    
+    while Adder:
+        user_input = input("Add: ")
+        
+        if user_input == "caution_glass":
+            Adder = False
+        elif user_input not in massive:
+            massive.append(user_input)
+        else:
+            pass
+        
+    #print(shuffle_all(massive))
+    #for x in shuffle_yield(massive):
+        #print("".join(x))
